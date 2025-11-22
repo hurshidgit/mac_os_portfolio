@@ -6,7 +6,9 @@
 			"@constants/*": ["src/components/constants/*"],
 			"@store/*": ["src/store/*"],
 			"@hoc/*": ["src/hoc/*"],
-			"@windows/*": ["src/windows/*"]
+			"@windows/*": ["src/windows/*"],
+			"@gsap": ["src/gsap"],
+			"@gsap/*": ["src/gsap/*"]
 		}
 	},
 	"include": ["src"]

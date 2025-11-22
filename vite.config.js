@@ -22,6 +22,7 @@ export default defineConfig({
 				dirname(fileURLToPath(import.meta.url)),
 				'src/windows'
 			),
+			'@gsap': resolve(dirname(fileURLToPath(import.meta.url)), 'src/gsap'),
 		},
 	},
 })
