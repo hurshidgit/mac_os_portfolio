@@ -3,7 +3,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"@components/*": ["src/components/*"],
-			"@constants/*": ["src/components/constants/*"],
+			"@constants/*": ["src/constants/*"],
 			"@store/*": ["src/store/*"],
 			"@hoc/*": ["src/hoc/*"],
 			"@windows/*": ["src/windows/*"],
@@ -11,5 +11,5 @@
 			"@gsap/*": ["src/gsap/*"]
 		}
 	},
-	"include": ["src"]
+	"include": ["src", "src/constants"]
 }

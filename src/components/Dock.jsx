@@ -1,12 +1,22 @@
+import useWindowStore from '@store/window'
 import { useEffect, useRef } from 'react'
 import { Tooltip } from 'react-tooltip'
-import { dockApps } from './constants'
+import { dockApps } from '../constants'
 
 const Dock = () => {
+	const { openWindow, closeWindow, windows } = useWindowStore()
 	const dockRef = useRef(null)
 
 	const toggleApp = app => {
-		// To do implement app opening logic
+		if (!app.canOpen) return
+
+		const window = windows[app.id]
+
+		if (window.isOpen) {
+			closeWindow(app.id)
+		} else {
+			openWindow(app.id)
+		}
 	}
 
 	useEffect(() => {
