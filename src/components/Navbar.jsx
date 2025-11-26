@@ -7,11 +7,7 @@ const Navbar = () => {
 	return (
 		<nav>
 			<div>
-				<img
-					src='/public/images/logo.svg'
-					alt='Logo'
-					className='cursor-pointer'
-				/>
+				<img src='/images/logo.svg' alt='Logo' className='cursor-pointer' />
 				<p className='font-bold'>Hurshid's Portfolio</p>
 
 				<ul>
