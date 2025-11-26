@@ -4,34 +4,42 @@ import { useLayoutEffect, useRef } from 'react'
 const WindowWrapper = (Component, windowKey) => {
 	const Wrapped = props => {
 		const { windows, focusWindow } = useWindowStore()
-		const { isOpen, zIndex } = windows[windowKey]
+		const win = windows[windowKey] || { isOpen: false, zIndex: 1 }
+		const { isOpen, zIndex } = win
 		const ref = useRef(null)
 
 		// 🟡 Draggable va focus
-		useLayoutEffect(() => {
-			const el = ref.current
-			if (!el) return
+  useLayoutEffect(() => {
+            const el = ref.current
+            if (!el) return
 
-			const gsap = window.gsap
-			const Draggable = window.Draggable
+            const gsap = window.gsap
+            const Draggable = window.Draggable
 
-			if (!gsap || !Draggable) {
-				console.warn('GSAP yoki Draggable topilmadi')
-				return
-			}
+            if (!gsap || !Draggable) {
+                console.warn('GSAP yoki Draggable topilmadi')
+                return
+            }
 
-			gsap.registerPlugin(Draggable)
+            gsap.registerPlugin(Draggable)
 
-			// faqat headerdan ushlab sudrash uchun: handle: '#window-header'
-			const draggableInstance = Draggable.create(el, {
-				handle: '#window-header',
-				onPress: () => focusWindow(windowKey),
-			})[0]
+            // Har bir oyna faqat O'Z headeri orqali drag bo'lishi uchun
+            // trigger sifatida ichki header elementini aniq beramiz.
+            const handleEl = el.querySelector('.window-header') || el
 
-			return () => {
-				if (draggableInstance) draggableInstance.kill()
-			}
-		}, [focusWindow, windowKey])
+            const draggableInstance = Draggable.create(el, {
+                trigger: handleEl, // faqat shu oynaning headeri dragni boshlaydi
+                type: 'x,y',
+                bounds: window,
+                zIndexBoost: false,
+                allowNativeTouchScrolling: false,
+                onPress: () => focusWindow(windowKey),
+            })[0]
+
+            return () => {
+                if (draggableInstance) draggableInstance.kill()
+            }
+  }, [focusWindow, windowKey, isOpen])
 
 		// 🔵 Oyna ochilib/yopilganda animatsiya
 		useLayoutEffect(() => {
@@ -63,7 +71,13 @@ const WindowWrapper = (Component, windowKey) => {
 		}, [isOpen])
 
 		return (
-			<section id={windowKey} ref={ref} style={{ zIndex }} className='absolute'>
+			<section
+				id={windowKey}
+				ref={ref}
+				style={{ zIndex }}
+				className='absolute'
+				onMouseDown={() => focusWindow(windowKey)} // 🔴 bosganda ham zIndex oshadi
+			>
 				<Component {...props} />
 			</section>
 		)

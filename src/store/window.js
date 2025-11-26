@@ -20,7 +20,6 @@ const useWindowStore = create(
 		closeWindow: windowKey =>
 			set(state => {
 				const win = state.windows[windowKey]
-				// Defensive: if the window key is invalid, do nothing
 				if (!win) return
 				win.isOpen = false
 				win.zIndex = INITIAL_Z_INDEX
@@ -30,8 +29,10 @@ const useWindowStore = create(
 		focusWindow: windowKey =>
 			set(state => {
 				const win = state.windows[windowKey]
+				if (!win) return
 				win.zIndex = state.nextZIndex++
 			}),
 	}))
 )
+
 export default useWindowStore

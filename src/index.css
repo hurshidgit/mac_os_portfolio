@@ -119,6 +119,10 @@ body {
 	#window-header {
 		@apply flex items-center justify-between px-4 py-3 rounded-t-lg bg-gray-50 border-b border-gray-200 select-none text-sm text-gray-400;
 	}
+	/* Draggable handle endi class orqali ishlaydi */
+	.window-header {
+		@apply flex items-center justify-between px-4 py-3 rounded-t-lg bg-gray-50 border-b border-gray-200 select-none text-sm text-gray-400 touch-none cursor-move;
+	}
 
 	#safari {
 		@apply w-4xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
@@ -301,10 +305,31 @@ body {
 	#resume {
 		@apply w-fit h-fit absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
-		#window-header {
+		.window-header {
 			h2 {
 				@apply font-bold text-sm text-center flex-1;
 			}
+		}
+
+		/* PDF ko'rinishini sal kichraytirish (faqat Resume oynasida) */
+		.react-pdf__Page {
+			/* sahifani markazga keltiramiz */
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		/* Canvasni 92% ga kichraytiramiz, balandligi avtomatik moslashadi */
+		.react-pdf__Page canvas {
+			width: 92% !important;
+			height: auto !important;
+			display: block;
+		}
+
+		/* Matn va annotatsiya qatlamlarini ham mos ravishda masshtablash */
+		.react-pdf__Page__textContent,
+		.react-pdf__Page__annotations {
+			transform: scale(0.92);
+			transform-origin: top left;
 		}
 	}
 
@@ -363,7 +388,7 @@ body {
 	#imgfile {
 		@apply w-xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
-		#window-header {
+		.window-header {
 			p {
 				@apply font-bold text-[#5f6266];
 			}

@@ -6,7 +6,7 @@ import { Check, Flag } from 'feather-icons-react'
 const Terminal = () => {
 	return (
 		<>
-			<div id='window-header'>
+			<div className='window-header'>
 				<WindowControlls target='terminal' />
 				<h2>Tech Stack</h2>
 			</div>

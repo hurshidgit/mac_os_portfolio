@@ -1,7 +1,17 @@
 import { Navbar, Welcome } from '@components'
 import Dock from '@components/Dock'
+import Home from '@components/Home'
 import Terminal from '@windows/Terminal'
 import { useEffect } from 'react'
+import {
+	Contact,
+	Finder,
+	ImageFile,
+	Photos,
+	Resume,
+	Safari,
+	Text,
+} from './windows'
 
 const App = () => {
 	useEffect(() => {
@@ -20,6 +30,14 @@ const App = () => {
 			<Dock />
 
 			<Terminal />
+			<Safari />
+			<Resume />
+			<ImageFile />
+			<Text />
+			<Finder />
+			<Contact />
+			<Home />
+			<Photos />
 		</main>
 	)
 }
